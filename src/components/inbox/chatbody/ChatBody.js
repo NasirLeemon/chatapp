@@ -11,7 +11,6 @@ export default function ChatBody() {
     const { data: messages, isLoading, isError } = useGetMessagesQuery(id)
 
     let content;
-
     if (isLoading) {
         content = <div>Loading....</div>
     } else if (!isLoading && isError) {
@@ -25,7 +24,7 @@ export default function ChatBody() {
                     message={messages[0]}
                 />
                 <Messages messages={messages}/>
-                <Options />
+                <Options info={messages[0]}/>
             </>)
     }
 

@@ -13,7 +13,7 @@ export default function Messages({messages = []}) {
                 .map(message =>{
 
                     const {message : lastMessage, id, sender} = message || {}
-                    const justify = sender.email !== email ? 'start' : 'end'
+                    const justify = sender?.email !== email ? 'start' : 'end'
                     return   <Message key={id} justify={justify} message={lastMessage} />
                 })}
               

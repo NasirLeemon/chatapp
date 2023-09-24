@@ -1,12 +1,15 @@
 import { Link } from "react-router-dom";
 import logoImage from "../../assets/images/chat-app-logo-icon-removebg-preview.png" 
 import { userLoggedOut } from "../../features/auth/authSlice";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import gravatarUrl from "gravatar-url";
+
 
 
 export default function Navigation() {
     const dispatch = useDispatch()
-
+    const {user} = useSelector(state => state.auth || {})
+    const { email, name } = user || {} 
     const handleClick = () => {
         dispatch(userLoggedOut())
         localStorage.clear()
@@ -22,8 +25,13 @@ export default function Navigation() {
                             alt="Learn with Sumit"
                         />
                     </Link>
-                    <ul>
+                    <ul className="flex gap-5">
+                    <div>
+                    <img src={gravatarUrl(email, { size: 35 })} alt="User" />
+                    <p className="text-xs text-white">{name}</p>
+                    </div>
                         <li className="text-white" >
+                           
                             <span cursor='true' onClick={handleClick}>Logout</span>
                         </li>
                     </ul>
